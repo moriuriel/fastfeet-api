@@ -1,5 +1,6 @@
 import { Prop, SchemaFactory, Schema } from '@nestjs/mongoose';
 import { Schema as MongooseSchema } from 'mongoose';
+import { UserType } from '../interfaces';
 
 @Schema({ timestamps: true, autoCreate: true })
 export class User {
@@ -18,8 +19,8 @@ export class User {
   @Prop({ minlength: 12, maxlength: 12, required: true })
   document: string;
 
-  @Prop({ default: false })
-  is_deliveryman: boolean;
+  @Prop({ required: true, enum: UserType })
+  type: string;
 }
 
 export type UserDocument = User & Document;
