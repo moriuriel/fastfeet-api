@@ -1,0 +1,37 @@
+
+  
+version: '3'
+networks:
+  fastfeet:
+    external: true
+services:
+  app:
+    container_name: 'fastfeet-service'
+    image: node:lts-alpine
+    working_dir: /usr/src/app
+    restart: always
+    command: yarn start:dev
+    volumes:
+      - ./:/usr/src/app
+    networks:
+      - fastfeet
+    depends_on:
+      - mongo
+    links:
+      - mongo
+  mongo:
+    container_name: 'fastfeet-dev-db'
+    image: mongo
+    restart: always
+    command: mongod --port ${DB_PORT}
+    ports:
+      - '${DB_PORT}:${DB_PORT}'
+    volumes:
+      - ./.docker/db/mongodb:/data/db
+      - ./.docker/db/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: '${DB_USER}'
+      MONGO_INITDB_ROOT_PASSWORD: '${DB_PASS}'
+      MONGO_INITDB_DATABASE: '${DB_NAME}'
+    networks:
+      - fastfeet
