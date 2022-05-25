@@ -17,28 +17,33 @@ import { JwtAuthGuard } from 'src/modules/authentication/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/modules/authentication/guards/roles.guard';
 
 import { CreateUserDto } from '../dtos';
-import { CreateUserService } from '../services';
+import { CreateUserService, FindAllUsersService } from '../services';
 
 @Controller('/users')
 export class UsersController {
-  constructor(private readonly createUserSerivce: CreateUserService) {}
+  constructor(
+    private readonly createUserService: CreateUserService,
+    private readonly findAllUsersService: FindAllUsersService,
+  ) {}
   @Post()
   async create(
     @Body() data: CreateUserDto,
     @Response() response: ExpressResponse,
   ) {
-    const user = await this.createUserSerivce.execute(data);
+    const user = await this.createUserService.execute(data);
 
     return response.status(HttpStatus.CREATED).json({ user });
   }
 
   @Get()
-  @Roles('CUSTOMER')
+  @Roles('ADMIN')
   @UseGuards(JwtAuthGuard, RolesGuard)
   async index(
     @Request() request: ExpressRequest,
     @Response() response: ExpressResponse,
   ) {
-    return response.status(HttpStatus.OK).json({ true: 'ok' });
+    const users = await this.findAllUsersService.execute();
+
+    return response.status(HttpStatus.OK).json({ users });
   }
 }

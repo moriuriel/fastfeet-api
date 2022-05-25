@@ -4,7 +4,7 @@ import { HashProvider } from 'src/shared/providers/hashProvider/HashProvider.mod
 import { UsersController } from './controllers/User.controller';
 import { UserRepository } from './repositories/User.repository';
 import { User, UserSchema } from './schemas/User.schema';
-import { CreateUserService } from './services';
+import { CreateUserService, FindAllUsersService } from './services';
 
 @Module({
   imports: [
@@ -12,7 +12,7 @@ import { CreateUserService } from './services';
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
   controllers: [UsersController],
-  providers: [UserRepository, CreateUserService],
+  providers: [UserRepository, CreateUserService, FindAllUsersService],
   exports: [UserRepository],
 })
 export class UsersModule {}
