@@ -13,10 +13,10 @@ export class User {
   @Prop({ unique: true, required: true })
   email: string;
 
-  @Prop({ minlength: 6, required: true })
+  @Prop({ required: true })
   password: string;
 
-  @Prop({ minlength: 12, maxlength: 12, required: true, unique: true })
+  @Prop({ required: true, unique: true })
   document: string;
 
   @Prop({ required: true, enum: UserType })

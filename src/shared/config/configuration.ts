@@ -7,4 +7,8 @@ export default () => ({
     host: process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT, 10) || 5432,
   },
+  encryption: {
+    key: process.env.ENCRYPTION_KEY,
+    iv: process.env.ENCRYPTION_IV,
+  },
 });
