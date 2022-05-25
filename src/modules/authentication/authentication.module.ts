@@ -6,7 +6,7 @@ import { HashProvider } from 'src/shared/providers/hashProvider/HashProvider.mod
 
 import { UsersModule } from '../users/users.module';
 import AuthenticationController from './controllers/Authentication.controller';
-import AuthenticationService from './services/Authentication.service';
+import { AuthenticationService } from './services';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
