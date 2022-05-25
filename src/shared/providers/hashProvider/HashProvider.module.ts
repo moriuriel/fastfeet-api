@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
-import { BcryptProvider } from './implementations/Bcrypt.provider';
-import { CryptoProvider } from './implementations/Crypto.provider';
+import { BcryptProvider, CryptoProvider } from './implementations';
 
 @Module({
   providers: [BcryptProvider, CryptoProvider],

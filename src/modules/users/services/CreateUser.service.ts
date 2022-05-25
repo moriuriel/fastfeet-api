@@ -1,11 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { BcryptProvider } from 'src/shared/providers/hashProvider/implementations/Bcrypt.provider';
-import { CryptoProvider } from 'src/shared/providers/hashProvider/implementations/Crypto.provider';
-import { IUserRepository } from '../repositories/IUserRepository.interface';
-import { UserRepository } from '../repositories/User.repository';
-import { User } from '../schemas/User.schema';
+import {
+  BcryptProvider,
+  CryptoProvider,
+} from 'src/shared/providers/hashProvider/implementations';
 
+import { User } from '../schemas/User.schema';
+import { IUserRepository, UserRepository } from '../repositories';
 import { ICreateUser } from '../types';
+import { DATABASE_ERROR } from 'src/shared/errors/exceptions';
 
 @Injectable()
 export class CreateUserService {
@@ -42,7 +44,7 @@ export class CreateUserService {
 
       return user;
     } catch (error) {
-      console.log(error);
+      throw new DATABASE_ERROR(error);
     }
   }
 }

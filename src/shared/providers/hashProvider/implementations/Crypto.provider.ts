@@ -1,8 +1,9 @@
 import * as crypto from 'crypto';
 import configuration from 'src/shared/config/configuration';
+import { ICryptoProvider } from '../types';
 
-export class CryptoProvider {
-  encrypt(password) {
+export class CryptoProvider implements ICryptoProvider {
+  encrypt(password: string): string {
     const iv = this.hexStringToByte(configuration().encryption.iv.toString());
 
     const cipher = crypto.createCipheriv(
@@ -15,7 +16,7 @@ export class CryptoProvider {
     return `${iv.toString('hex')}:${encrypted.toString('hex')}`;
   }
 
-  decrypt(text) {
+  decrypt(text): string {
     const textParts = text.split(':');
     const iv = Buffer.from(textParts.shift(), 'hex');
     const encryptedText = Buffer.from(textParts.join(':'), 'hex');
@@ -30,7 +31,7 @@ export class CryptoProvider {
     return decrypted.toString();
   }
 
-  private hexStringToByte(str) {
+  hexStringToByte(str: string): Buffer {
     return Buffer.from(str, 'utf8');
   }
 }
