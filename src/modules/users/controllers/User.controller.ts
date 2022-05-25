@@ -33,7 +33,7 @@ export class UsersController {
   }
 
   @Get()
-  @Roles('ADMIN')
+  @Roles('CUSTOMER')
   @UseGuards(JwtAuthGuard, RolesGuard)
   async index(
     @Request() request: ExpressRequest,

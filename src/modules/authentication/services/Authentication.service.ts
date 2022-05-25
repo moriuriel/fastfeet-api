@@ -1,6 +1,9 @@
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UserRepository } from 'src/modules/users/repositories';
+import {
+  IUserRepository,
+  UserRepository,
+} from 'src/modules/users/repositories';
 import configuration from 'src/shared/config/configuration';
 import {
   CryptoProvider,
@@ -19,7 +22,7 @@ export class AuthenticationService {
     private readonly jwtService: JwtService,
 
     @Inject(UserRepository)
-    private readonly userRepository: UserRepository,
+    private readonly userRepository: IUserRepository,
 
     @Inject(CryptoProvider)
     private readonly cryptoProvider: ICryptoProvider,

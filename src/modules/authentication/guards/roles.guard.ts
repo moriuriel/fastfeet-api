@@ -3,32 +3,39 @@ import {
   CanActivate,
   ExecutionContext,
   Inject,
-  forwardRef,
+  UnauthorizedException,
+  ForbiddenException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { Observable } from 'rxjs';
 
-import { map } from 'rxjs/operators';
-import { Roles } from '../decorators/roles.decorator';
+import {
+  IUserRepository,
+  UserRepository,
+} from 'src/modules/users/repositories';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-  constructor(private reflector: Reflector) {}
+  constructor(
+    private reflector: Reflector,
 
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
+    @Inject(UserRepository)
+    private readonly userRepository: IUserRepository,
+  ) {}
+
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const roles = this.reflector.get<string[]>('roles', context.getHandler());
-
-    if (!roles) {
-      return true;
-    }
 
     const request = context.switchToHttp().getRequest();
 
-    const user = request.user;
+    const id = request.user.id;
 
-    console.log(roles, user);
+    const user = await this.userRepository.findById(id);
+
+    const hasAccess = roles.indexOf(user.type) > -1;
+
+    if (!hasAccess) {
+      throw new ForbiddenException();
+    }
 
     return true;
   }

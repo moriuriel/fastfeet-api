@@ -5,4 +5,5 @@ export interface IUserRepository {
   create(user: ICreateUser): Promise<User>;
   findAll(): Promise<User[]>;
   findByEmail(email: string): Promise<User>;
+  findById(id: string): Promise<User>;
 }
