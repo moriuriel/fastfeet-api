@@ -1,6 +1,6 @@
 import { Prop, SchemaFactory, Schema } from '@nestjs/mongoose';
 import { Schema as MongooseSchema } from 'mongoose';
-import { UserType } from '../interfaces';
+import { UserType } from '../types';
 
 @Schema({ timestamps: true, autoCreate: true })
 export class User {
@@ -16,11 +16,14 @@ export class User {
   @Prop({ minlength: 6, required: true })
   password: string;
 
-  @Prop({ minlength: 12, maxlength: 12, required: true })
+  @Prop({ minlength: 12, maxlength: 12, required: true, unique: true })
   document: string;
 
   @Prop({ required: true, enum: UserType })
   type: string;
+
+  @Prop({ default: true })
+  active: boolean;
 }
 
 export type UserDocument = User & Document;
