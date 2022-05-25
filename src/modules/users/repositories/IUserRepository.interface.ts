@@ -4,4 +4,5 @@ import { ICreateUser } from '../types/users.interface';
 export interface IUserRepository {
   create(user: ICreateUser): Promise<User>;
   findAll(): Promise<User[]>;
+  findByEmail(email: string): Promise<User>;
 }

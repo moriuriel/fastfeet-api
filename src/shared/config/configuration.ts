@@ -11,4 +11,8 @@ export default () => ({
     key: process.env.ENCRYPTION_KEY,
     iv: process.env.ENCRYPTION_IV,
   },
+  jwt: {
+    secret: String(process.env.JWT_SECRET),
+    expiresIn: String(process.env.JWT_EXPIRESIN) || '1d',
+  },
 });

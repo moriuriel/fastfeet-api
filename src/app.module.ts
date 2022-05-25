@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { UsersModule } from './modules/users/users.module';
 import configuration from './shared/config/configuration';
 import { DatabaseModule } from './shared/database/database.module';
@@ -11,6 +12,7 @@ import { HashProvider } from './shared/providers/hashProvider/HashProvider.modul
     DatabaseModule,
     HashProvider,
     UsersModule,
+    AuthenticationModule,
   ],
   controllers: [],
   providers: [],
