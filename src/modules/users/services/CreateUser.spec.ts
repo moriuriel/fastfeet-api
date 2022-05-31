@@ -1,4 +1,3 @@
-import { HttpException } from '@nestjs/common';
 import {
   BcryptProvider,
   CryptoProvider,
