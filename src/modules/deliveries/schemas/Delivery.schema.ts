@@ -7,7 +7,12 @@ export class Delivery {
   @Prop({ type: MongooseSchema.Types.ObjectId, auto: true })
   _id: string;
   @Prop({
-    type: [{ name: { type: String, required: true } }],
+    type: [
+      {
+        _id: { type: MongooseSchema.Types.ObjectId, auto: true },
+        name: { type: String, required: true },
+      },
+    ],
   })
   products: { name: string }[];
   @Prop({
@@ -73,10 +78,14 @@ export class Delivery {
   @Prop({ type: Date })
   delivery_date: Date;
 
-  @Prop({ required: true, enum: DeliveryStatus })
+  @Prop({
+    required: true,
+    enum: DeliveryStatus,
+    default: DeliveryStatus.TRANSIT,
+  })
   status: string;
 }
 
-export type UserDocument = Delivery & Document;
+export type DeliveryDocument = Delivery & Document;
 
-export const UserSchema = SchemaFactory.createForClass(Delivery);
+export const DeliverySchema = SchemaFactory.createForClass(Delivery);
