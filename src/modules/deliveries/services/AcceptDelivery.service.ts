@@ -1,10 +1,14 @@
-import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import {
   IUserRepository,
   UserRepository,
 } from 'src/modules/users/repositories';
+import { UserType } from 'src/modules/users/types';
 
-import { DATABASE_ERROR } from 'src/shared/errors/exceptions';
+import {
+  APPLICATION_ERROR,
+  DATABASE_ERROR,
+} from 'src/shared/errors/exceptions';
 import { DeliveryRepository, IDeliveryRepository } from '../repositories';
 import { Delivery } from '../schemas/Delivery.schema';
 import { DeliveryStatus, IAccepDeliveryServiceParams } from '../types';
@@ -27,29 +31,40 @@ export class AcceptDeliveryService {
 
     const hasDelivery = !!currentDelivery;
 
+    const deliveryMan = await this.userRepository.findById(deliveryManId);
+
+    const isValidDeliveryMan =
+      !!deliveryMan && deliveryMan.type === UserType.DELIVERYMAN;
+
+    if (isValidDeliveryMan)
+      throw new APPLICATION_ERROR(
+        'This users is not valid for accept delivery',
+        HttpStatus.NOT_FOUND,
+      );
+
     if (!hasDelivery)
-      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+      throw new APPLICATION_ERROR('Delivery not found', HttpStatus.NOT_FOUND);
 
     const isValidStatusToAccept =
       currentDelivery.status === DeliveryStatus.OPEN;
 
-    const hasDeliveryManForDelivery = currentDelivery.delivery_man;
+    const hasDeliveryManForDelivery = !!currentDelivery.delivery_man;
 
     if (hasDeliveryManForDelivery)
-      throw new HttpException(
+      throw new APPLICATION_ERROR(
         'Has deliveryMan for this delivery',
-        HttpStatus.BAD_REQUEST,
+        HttpStatus.UNPROCESSABLE_ENTITY,
       );
 
     if (!isValidStatusToAccept)
-      throw new HttpException(
+      throw new APPLICATION_ERROR(
         'Invalid status to accept delivery',
-        HttpStatus.BAD_REQUEST,
+        HttpStatus.UNPROCESSABLE_ENTITY,
       );
 
     currentDelivery.delivery_man = {
       _id: deliveryManId,
-      name: 'Uriel Mori Vanso',
+      name: deliveryMan.name,
     };
 
     currentDelivery.status = DeliveryStatus.TRANSIT;

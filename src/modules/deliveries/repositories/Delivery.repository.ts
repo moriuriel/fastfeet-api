@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
+import { FindAllUsersService } from 'src/modules/users/services';
+import { IPagination } from 'src/shared/decorators/GetPagination/GetPagination.interface';
 import { Delivery } from '../schemas/Delivery.schema';
 import { ICreateDelivery } from '../types';
 import {
   IDeliveryRepository,
+  IFindAllDeliveryResponse,
   IUpdateDeliveryParams,
 } from './DeliveryRepository.interface';
 
@@ -30,5 +33,19 @@ export class DeliveryRepository implements IDeliveryRepository {
         new: true,
       },
     );
+  }
+
+  async findAll({
+    limit,
+    page,
+  }: IPagination): Promise<IFindAllDeliveryResponse> {
+    const total = await this.deliveryRepository.count();
+
+    const delivery = await this.deliveryRepository
+      .find()
+      .limit(limit)
+      .skip((page - 1) * limit);
+
+    return { total, delivery };
   }
 }
