@@ -3,4 +3,5 @@ export enum DeliveryStatus {
   SHIPPED = 'SHIPPED',
   UNSHIPPED = 'UNSHIPPED',
   CANCELED = 'CANCELED',
+  OPEN = 'OPEN',
 }

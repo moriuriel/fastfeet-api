@@ -21,3 +21,8 @@ export interface ICreateDelivery {
   shipping_address: IDeliveryShippingAddress;
   owner: IDeliveryOwner;
 }
+
+export interface IAccepDeliveryServiceParams {
+  deliveryManId: string;
+  deliveryId: string;
+}

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from '../users/users.module';
-import { DeliveriesController } from './controllers/Deliveries.controller';
+import { DeliveriesController, AcceptDeliveryController } from './controllers';
 import { DeliveryRepository } from './repositories';
 import { Delivery, DeliverySchema } from './schemas/Delivery.schema';
-import { CreateDeliveryService } from './services';
+import { AcceptDeliveryService, CreateDeliveryService } from './services';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { CreateDeliveryService } from './services';
       { name: Delivery.name, schema: DeliverySchema },
     ]),
   ],
-  controllers: [DeliveriesController],
-  providers: [DeliveryRepository, CreateDeliveryService],
+  controllers: [DeliveriesController, AcceptDeliveryController],
+  providers: [DeliveryRepository, CreateDeliveryService, AcceptDeliveryService],
 })
 export class DeliveriesModule {}

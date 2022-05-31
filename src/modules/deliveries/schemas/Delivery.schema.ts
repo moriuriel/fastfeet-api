@@ -81,7 +81,7 @@ export class Delivery {
   @Prop({
     required: true,
     enum: DeliveryStatus,
-    default: DeliveryStatus.TRANSIT,
+    default: DeliveryStatus.OPEN,
   })
   status: string;
 }
