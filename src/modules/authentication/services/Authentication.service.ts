@@ -14,7 +14,7 @@ import {
   IHashProvider,
 } from 'src/shared/providers/hashProvider/types';
 
-import { IAuthenticationReponse, IAuthenticationUser } from '../interfaces';
+import { IAuthenticationReponse, IAuthenticationUser } from '../types';
 
 @Injectable()
 export class AuthenticationService {

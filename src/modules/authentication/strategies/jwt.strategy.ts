@@ -1,7 +1,7 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import configuration from 'src/shared/config/configuration';
-import { IDecodedToken } from '../interfaces';
+import { IDecodedToken } from '../types';
 
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
