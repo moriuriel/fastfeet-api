@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { IPagination } from 'src/shared/decorators/GetPagination/GetPagination.interface';
 import { User } from '../schemas/User.schema';
 import { ICreateUser } from '../types/users.interface';
-import { IFindAllResponse, IUserRepository } from './IUserRepository.interface';
+import { IFindAllResponse, IUserRepository } from './UserRepository.interface';
 
 @Injectable()
 export class UserRepository implements IUserRepository {
