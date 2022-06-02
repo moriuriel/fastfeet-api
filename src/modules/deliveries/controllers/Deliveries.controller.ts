@@ -11,8 +11,10 @@ import { Response as ExpressResponse } from 'express';
 import { Roles } from 'src/modules/authentication/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/modules/authentication/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/modules/authentication/guards/roles.guard';
-import { GetPagination } from 'src/shared/decorators/GetPagination/getPagination.decorator';
-import { IPagination } from 'src/shared/decorators/GetPagination/GetPagination.interface';
+import {
+  GetPagination,
+  IPagination,
+} from 'src/shared/decorators/GetPagination';
 import { CreateDeliveryDto } from '../dtos';
 import { CreateDeliveryService, FindAllDeliveriesService } from '../services';
 

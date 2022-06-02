@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { FindAllUsersService } from 'src/modules/users/services';
-import { IPagination } from 'src/shared/decorators/GetPagination/GetPagination.interface';
+import { IPagination } from 'src/shared/decorators/GetPagination';
 import { Delivery } from '../schemas/Delivery.schema';
 import { ICreateDelivery } from '../types';
 import {

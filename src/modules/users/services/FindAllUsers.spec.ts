@@ -1,4 +1,4 @@
-import { IPagination } from 'src/shared/decorators/GetPagination/GetPagination.interface';
+import { IPagination } from 'src/shared/decorators/GetPagination';
 import { InMemoryUserRepository } from '../repositories/InMemoryUser.respository';
 import { FindAllUsersService } from './FindAllUsers.service';
 

@@ -1,4 +1,4 @@
-import { IPagination } from 'src/shared/decorators/GetPagination/GetPagination.interface';
+import { IPagination } from 'src/shared/decorators/GetPagination';
 import { Delivery } from '../schemas/Delivery.schema';
 import { ICreateDelivery } from '../types';
 

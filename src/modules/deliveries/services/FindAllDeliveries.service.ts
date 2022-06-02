@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IPagination } from 'src/shared/decorators/GetPagination/GetPagination.interface';
+import { IPagination } from 'src/shared/decorators/GetPagination';
 import { DATABASE_ERROR } from 'src/shared/errors/exceptions';
 import { DeliveryRepository, IDeliveryRepository } from '../repositories';
 import { FindAllDeliveriesResponse } from '../types';

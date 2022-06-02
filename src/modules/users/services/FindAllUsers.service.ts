@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { IUserRepository, UserRepository } from '../repositories';
 import { DATABASE_ERROR } from 'src/shared/errors/exceptions';
-import { IPagination } from 'src/shared/decorators/GetPagination/GetPagination.interface';
+import { IPagination } from 'src/shared/decorators/GetPagination';
 import { IFindAllUserResponse } from '../types';
 
 @Injectable()
