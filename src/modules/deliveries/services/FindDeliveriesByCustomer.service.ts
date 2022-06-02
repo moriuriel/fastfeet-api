@@ -5,16 +5,18 @@ import { DeliveryRepository, IDeliveryRepository } from '../repositories';
 import { FindAllDeliveriesResponse } from '../types';
 
 @Injectable()
-export class FindAllDeliveriesService {
+export class FindAllDeliveriesByCustomerService {
   constructor(
     @Inject(DeliveryRepository)
     private readonly deliveryRepository: IDeliveryRepository,
   ) {}
-  async execute(pagination: IPagination): Promise<FindAllDeliveriesResponse> {
+  async execute(
+    pagination: IPagination,
+    customerId: string,
+  ): Promise<FindAllDeliveriesResponse> {
     try {
-      const { deliveries, total } = await this.deliveryRepository.findAll(
-        pagination,
-      );
+      const { deliveries, total } =
+        await this.deliveryRepository.findAllByOwnerId(pagination, customerId);
 
       return {
         deliveries,

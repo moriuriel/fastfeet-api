@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { IPagination } from 'src/shared/decorators/GetPagination/GetPagination.interface';
 import { User } from '../schemas/User.schema';
 import { ICreateUser } from '../types/users.interface';
@@ -30,6 +30,6 @@ export class UserRepository implements IUserRepository {
   }
 
   async findById(id: string): Promise<User> {
-    return this.userRespository.findOne({ id });
+    return this.userRespository.findOne({ _id: new Types.ObjectId(id) });
   }
 }

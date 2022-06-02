@@ -47,4 +47,18 @@ export class DeliveryRepository implements IDeliveryRepository {
 
     return { total, deliveries };
   }
+
+  async findAllByOwnerId(
+    { limit, page }: IPagination,
+    customerId: string,
+  ): Promise<IFindAllDeliveryResponse> {
+    const total = await this.deliveryRepository.count();
+
+    const deliveries = await this.deliveryRepository
+      .find({ 'owner._id': new Types.ObjectId(customerId) })
+      .limit(limit)
+      .skip((page - 1) * limit);
+
+    return { total, deliveries };
+  }
 }

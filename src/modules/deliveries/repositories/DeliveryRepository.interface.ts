@@ -16,4 +16,8 @@ export interface IDeliveryRepository {
   findOne(id: string): Promise<Delivery>;
   update(params: IUpdateDeliveryParams);
   findAll(pagination: IPagination): Promise<IFindAllDeliveryResponse>;
+  findAllByOwnerId(
+    pagination: IPagination,
+    customerId: string,
+  ): Promise<IFindAllDeliveryResponse>;
 }

@@ -34,9 +34,9 @@ export class AcceptDeliveryService {
     const deliveryMan = await this.userRepository.findById(deliveryManId);
 
     const isValidDeliveryMan =
-      !!deliveryMan && deliveryMan.type === UserType.DELIVERYMAN;
+      !!deliveryMan && UserType[deliveryMan.type] === UserType.DELIVERYMAN;
 
-    if (isValidDeliveryMan)
+    if (!isValidDeliveryMan)
       throw new APPLICATION_ERROR(
         'This users is not valid for accept delivery',
         HttpStatus.NOT_FOUND,
