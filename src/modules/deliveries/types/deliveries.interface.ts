@@ -1,3 +1,6 @@
+import { IPagination } from 'src/shared/decorators/GetPagination/GetPagination.interface';
+import { Delivery } from '../schemas/Delivery.schema';
+
 export interface IDeliveryOwner {
   _id: string;
   name: string;
@@ -25,4 +28,9 @@ export interface ICreateDelivery {
 export interface IAccepDeliveryServiceParams {
   deliveryManId: string;
   deliveryId: string;
+}
+
+export interface FindAllDeliveriesResponse {
+  deliveries: Delivery[];
+  pagination: IPagination;
 }

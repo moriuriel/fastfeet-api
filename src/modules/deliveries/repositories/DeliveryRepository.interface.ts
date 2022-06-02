@@ -8,7 +8,7 @@ export interface IUpdateDeliveryParams {
 }
 
 export interface IFindAllDeliveryResponse {
-  delivery: Delivery[];
+  deliveries: Delivery[];
   total: number;
 }
 export interface IDeliveryRepository {

@@ -4,7 +4,11 @@ import { UsersModule } from '../users/users.module';
 import { DeliveriesController, AcceptDeliveryController } from './controllers';
 import { DeliveryRepository } from './repositories';
 import { Delivery, DeliverySchema } from './schemas/Delivery.schema';
-import { AcceptDeliveryService, CreateDeliveryService } from './services';
+import {
+  AcceptDeliveryService,
+  CreateDeliveryService,
+  FindAllDeliveriesService,
+} from './services';
 
 @Module({
   imports: [
@@ -14,6 +18,11 @@ import { AcceptDeliveryService, CreateDeliveryService } from './services';
     ]),
   ],
   controllers: [DeliveriesController, AcceptDeliveryController],
-  providers: [DeliveryRepository, CreateDeliveryService, AcceptDeliveryService],
+  providers: [
+    DeliveryRepository,
+    CreateDeliveryService,
+    AcceptDeliveryService,
+    FindAllDeliveriesService,
+  ],
 })
 export class DeliveriesModule {}

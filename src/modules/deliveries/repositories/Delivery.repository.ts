@@ -41,11 +41,11 @@ export class DeliveryRepository implements IDeliveryRepository {
   }: IPagination): Promise<IFindAllDeliveryResponse> {
     const total = await this.deliveryRepository.count();
 
-    const delivery = await this.deliveryRepository
+    const deliveries = await this.deliveryRepository
       .find()
       .limit(limit)
       .skip((page - 1) * limit);
 
-    return { total, delivery };
+    return { total, deliveries };
   }
 }
